@@ -1,8 +1,6 @@
 from cellpose import io
-from cellpose.io import imread
-import numpy as np
 
-from src.utils.get_abs_path import get_file, get_lst_path, time_files
+from src import time_files
 
 io.logger_setup()
 
