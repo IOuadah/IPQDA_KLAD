@@ -1,7 +1,8 @@
 import os
 import pandas as pd
-from skimage.io import imread
+from cellpose.io import imread
 from skimage.measure import regionprops_table
+
 
 def measure_intensity(mask_folder, image_folder, output_csv):
     data = []
@@ -17,6 +18,7 @@ def measure_intensity(mask_folder, image_folder, output_csv):
     result = pd.concat(data)
     result.to_csv(output_csv, index=False)
 
+
 # Measure intensity for control and sample datasets
-measure_intensity('results/masks/control', 'data/control', 'results/intensity/control_intensity.csv')
-measure_intensity('results/masks/sample', 'data/sample', 'results/intensity/sample_intensity.csv')
+# measure_intensity('results/masks/control', 'data/control', 'results/intensity/control_intensity.csv')
+# measure_intensity('results/masks/sample', 'data/sample', 'results/intensity/sample_intensity.csv')

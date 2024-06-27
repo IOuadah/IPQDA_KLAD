@@ -1,8 +1,10 @@
 import os
 import cv2
 import numpy as np
+from cellpose.io import imread, imsave
 from skimage.morphology import dilation, erosion, disk
-from skimage.io import imread, imsave
+# from skimage.io import imread, imsave
+
 
 def create_measurement_masks(cell_mask_path, nucleus_mask_path, output_path):
     if not os.path.exists(output_path):
@@ -30,6 +32,7 @@ def create_measurement_masks(cell_mask_path, nucleus_mask_path, output_path):
         imsave(os.path.join(output_path, f'cytoplasm_{region}.png'), cyt.astype(np.uint8))
         imsave(os.path.join(output_path, f'boundary_{region}.png'), bound.astype(np.uint8))
 
+
 # Create measurement masks for control and sample datasets
-create_measurement_masks('results/segmentation/control', 'results/masks/control')
-create_measurement_masks('results/segmentation/sample', 'results/masks/sample')
+# create_measurement_masks('results/segmentation/control', 'results/masks/control')
+# create_measurement_masks('results/segmentation/sample', 'results/masks/sample')
