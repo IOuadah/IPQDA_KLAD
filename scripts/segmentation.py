@@ -8,18 +8,22 @@ from scripts.utils.get_abs_path import get_file, get_lst_path
 import numpy as np
 import matplotlib.pyplot as plt
 
+from skimage import morphology, io as skimage_io
+
 
 # Function to perform segmentation
 def segment_images(input_folder, output_folder, cell_component):
-    # Load the Cellpose model
-    model = models.Cellpose(gpu=False, model_type='cyto2')
-
     channels = [0, 0]
+    diam = None
+
     if cell_component == "cyt":
-        channels = [2, 0]  # = [cytoplasm, nucleus] [G, non-existent]
+        model = models.Cellpose(gpu=False, model_type='cyto2')
+        channels = [2, 0]
+        # diam = 100
     elif cell_component == "nuc":
         model = models.Cellpose(gpu=False, model_type='nuclei')
-        channels = [2, 1]  # = [cytoplasm, nucleus] [G, R]
+        channels = [1, 2]
+        diam = 80
     else:
         raise ValueError("Invalid cell component, use 'cyt' for cytoplasm and 'nuc' for nucleus")
 
@@ -28,32 +32,49 @@ def segment_images(input_folder, output_folder, cell_component):
 
     print("state files variable")
     files = os.listdir(input_folder)
-    # print(files, type(files))
     images = load_images(input_folder)
-
-    for img in images:
-        plt.imshow(img)
-        plt.axis('off')
-        plt.show()
 
     for img, file in zip(images, files):
         print("model eval")
-        masks, flows, styles, diams = model.eval(img, diameter=None, channels=channels)
+        masks, flows, styles, diams = model.eval(img, diameter=diam, channels=channels)
 
         # error fix instead of numpy.float64
         diams = str(diams)
 
         print("masks to seg")
+        # out_file = output_folder + f"/{cell_component}_" + str(file.replace('.tif', ''))
         out_file = output_folder + "/" + str(file.replace('.tif', ''))
         print(out_file)
-        # io.masks_flows_to_seg(img, masks, flows, out_file, diams)
-        io.save_masks(img, masks, flows, out_file)
+        io.masks_flows_to_seg(img, masks, flows, out_file, diams)
 
+        # Save masks to file
+        # mask_save_path = mask_folder + f"/{cell_component}_" + str(file.replace('.tif', '_mask.tif'))
+        mask_save_path = output_folder + "/" + str(file.replace('.tif', '_mask.tif'))
+        io.imsave(mask_save_path, masks.astype(np.uint16))
+        print(f"Saved masks to: {mask_save_path}")
 
-# out_path = os.path.join('temp_output', "segmentation", "control")
+        # Generate and save outlines
+        # Create a binary mask for the outlines
+        outlines = np.zeros_like(masks, dtype=bool)
+        for unique_value in np.unique(masks):
+            if unique_value == 0:  # Skip background
+                continue
+            mask = masks == unique_value
+            outline = morphology.dilation(mask) ^ mask
+            outlines |= outline
 
+        # Convert boolean outlines to a format suitable for saving
+        outlines_image = outlines.astype(np.uint16) * 65535  # Max value for uint16 to ensure visibility
+        outline_save_path = output_folder + "/" + str(file.replace('.tif', '_outline.tif'))
+        skimage_io.imsave(outline_save_path, outlines_image)
 
-# Segment control and sample datasets
-# segment_images('data/cyt/control', 'temp_output/segmentation/control', "cyt")
-# segment_images('data/nuc/control', 'temp_output/segmentation/control', "nuc")
-# segment_images('data/cyt/sample', 'temp_output/segmentation/sample', "cyt")
+        print(f"Saved outlines to: {outline_save_path}")
+
+        # Optional: visualize the original image and the masks
+        fig, ax = plt.subplots(1, 2, figsize=(12, 6))
+        ax[0].imshow(img, cmap='gray')
+        ax[0].set_title('Original Image')
+        ax[1].imshow(masks, cmap='jet')
+        ax[1].set_title('Segmented Masks')
+        plt.show()
+
