@@ -26,15 +26,18 @@ TASK 3: Next, we had to create a training dataset for the segmentation of the cy
 
 **Explain before and afters**
 
-Task 4: Training the custom cellpose models. 
-To improve the segmentation accuracy, we trained custom cellpose models for the cytoplasm and the nuclei. This was established by choosing 8 images from each dataset (control and sample) for both the cytoplasm and the nucleus, eventually ending up with 32 images. The 8 images were selected by using intervals of 10, this was done to keep the temporal tendencies in the dataset. The selected images  underwent manually improving of the pre-trained segmentation to ensure high quality training data. The manual editing was done in FIJI. /
+Task 4: Training the custom cellpose models. <br />
+To improve the segmentation accuracy, we trained custom cellpose models for the cytoplasm and the nuclei. This was established by choosing 8 images from each dataset (control and sample) for both the cytoplasm and the nucleus, eventually ending up with 32 images. The 8 images were selected by using intervals of 10, this was done to keep the temporal tendencies in the dataset. The selected images  underwent manually improving of the pre-trained segmentation to ensure high quality training data. The manual editing was done in FIJI. <br />
 
-The model's training parameters:/
-Epochs: /
-Batch size: /
-Learning rate: /
+The model's training parameters:
+Epochs: 
 
-After training, the training data was segmented using the custom models and compared to the result obtained from the pretrained models. This resulted for the cytoplasm model a more accurate boundary detection and cell shapes and for the nucleus model a better handling of overlapping nuclei. /
+Batch size: 
+
+Learning rate: 
+
+
+After training, the training data was segmented using the custom models and compared to the result obtained from the pretrained models. This resulted for the cytoplasm model a more accurate boundary detection and cell shapes and for the nucleus model a better handling of overlapping nuclei. 
 
 
 Task 8: The new version of the Fiji plugin called TrackMate offers a comprehensive suite of tools to perform tracking, data visualization, track analysis in an efficient and user-friendly manner. This versatile tool facilitates the tracking of single cells viewed with fluorescence microscopes, making it an essential tool for biological research  (Tinevez et al., 2017).
