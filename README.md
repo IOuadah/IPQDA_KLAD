@@ -12,15 +12,18 @@ The data consisted of a control dataset, this resembles the "normal" situation w
 
 
 
-Task 4: Training the custom cellpose models. 
-To improve the segmentation accuracy, we trained custom cellpose models for the cytoplasm and the nuclei. This was established by choosing 8 images from each dataset (control and sample) for both the cytoplasm and the nucleus, eventually ending up with 32 images. The 8 images were selected by using intervals of 10, this was done to keep the temporal tendencies in the dataset. The selected images  underwent manually improving of the pre-trained segmentation to ensure high quality training data. The manual editing was done in FIJI. /
+Task 4: Training the custom cellpose models. <br />
+To improve the segmentation accuracy, we trained custom cellpose models for the cytoplasm and the nuclei. This was established by choosing 8 images from each dataset (control and sample) for both the cytoplasm and the nucleus, eventually ending up with 32 images. The 8 images were selected by using intervals of 10, this was done to keep the temporal tendencies in the dataset. The selected images  underwent manually improving of the pre-trained segmentation to ensure high quality training data. The manual editing was done in FIJI. <br />
 
-The model's training parameters:/
-Epochs: /
-Batch size: /
-Learning rate: /
+The model's training parameters:
+Epochs: 
 
-After training, the training data was segmented using the custom models and compared to the result obtained from the pretrained models. This resulted for the cytoplasm model a more accurate boundary detection and cell shapes and for the nucleus model a better handling of overlapping nuclei. /
+Batch size: 
+
+Learning rate: 
+
+
+After training, the training data was segmented using the custom models and compared to the result obtained from the pretrained models. This resulted for the cytoplasm model a more accurate boundary detection and cell shapes and for the nucleus model a better handling of overlapping nuclei. 
 
 
 
