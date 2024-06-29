@@ -56,12 +56,11 @@ For visualization, we plotted the average fluorescence intensity over time for b
 
 SHOW PLOT> handigst om een plot te hebben waarin zowel control als sample zit daaruit kna je conclusies trekken zoals of er meer intensity is in de cellboundary in de control dan in de sample zoiets. 
 
-
-
-
 Task 8: <br /> The new version of the Fiji plugin called TrackMate offers a comprehensive suite of tools to perform tracking, data visualization, track analysis in an efficient and user-friendly manner. This versatile tool facilitates the tracking of single cells viewed with fluorescence microscopes, making it an essential tool for biological research  (Tinevez et al., 2017).
 
 Using TrackMate, researchers are able to track the movements and behaviors of individual cells, providing crucial insight into various physiological processes (Fazeli et al., 2020).
+
+Task 9: <br /> Lastly, in this final task we generated the measurement masks for the compartments with the help of the tracked label mask files which were created in the previous task. The measurements were then done on the tracked data and plots were created of the single cell traces over a period of time.
 
 Contributions
 
