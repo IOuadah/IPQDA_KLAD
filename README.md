@@ -9,3 +9,28 @@ The innovations in the field of single cell technologies have made it possible t
 β-catenin is a protein that is involved in cell-cell interactions, it is therefore found in the cell boundaries. However, β-catenin also plays a role in gene regulation, which causes an increase of the protein in the cytoplasm and in the nucleus. This increase can be experimentally induced by using a specific drug that inhibits β-catenin degradation or by inducing the so-called Wnt pathway using Wnt ligands. \
 
 The data consisted of a control dataset, this resembles the "normal" situation without stimulation and a sample dataset which is the situation with stimulation. The aim of this pipeline is to measure the average fluorescence intensity of β-catenin across three different compartements, namely the nucleus, the cytoplasm and the cell boundary. To accomplish this, accurate segmentation of both of the channels was essential. To handle the complex shapes of the cells and the varying intensity contrasts of the cells and nuclei, we used the robust Cellpose. Cellpose is a deeplearning based method that is written in Python. It has a useful API, which also allows for training of custom models based on user data. We used this to train our own segmentation model, to improve the accuracy of segmentation. Using these segmentated masks, we calculated the measurement masks of the different compartements to eventually measure the average fluorescence intensity. 
+
+
+
+Task 4: Training the custom cellpose models. 
+To improve the segmentation accuracy, we trained custom cellpose models for the cytoplasm and the nuclei. This was established by choosing 8 images from each dataset (control and sample) for both the cytoplasm and the nucleus, eventually ending up with 32 images. The 8 images were selected by using intervals of 10, this was done to keep the temporal tendencies in the dataset. The selected images  underwent manually improving of the pre-trained segmentation to ensure high quality training data. The manual editing was done in FIJI. /
+
+The model's training parameters:/
+Epochs: /
+Batch size: /
+Learning rate: /
+
+After training, the training data was segmented using the custom models and compared to the result obtained from the pretrained models. This resulted for the cytoplasm model a more accurate boundary detection and cell shapes and for the nucleus model a better handling of overlapping nuclei. /
+
+
+
+
+
+
+
+
+
+
+
+
+
