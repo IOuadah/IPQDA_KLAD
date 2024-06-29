@@ -39,6 +39,13 @@ Learning rate:
 
 After training, the training data was segmented using the custom models and compared to the result obtained from the pretrained models. This resulted for the cytoplasm model a more accurate boundary detection and cell shapes and for the nucleus model a better handling of overlapping nuclei. 
 
+Task 5. In this task, the trained models were applied to segment the entire datasets for both channels. With this task we can assess the performance of the model on a larger scale as well as providing visual and dynamic representations of the process.
+  - Images showing the segmentation outlines and masks for both cytoplasm and nucleus.
+  - Commentary on the segmentation quality, noting any improvements compared to the initial results.
+  - Presentation of GIF animations to provide a comprehensive view of the segmentation performance.
+  - Summary of the overall performance and any suggestions for further improvements.
+
+
 Task 6: Measurement masks <br />
 To quantify the intensity of the protein of interest in the different compartements, we needed to create measurement masks based on the raw nuclear and cytoplasm masks. We created these masks for the nucleus, cytoplasm and cell boundaries, considering that these are the areas that β-catenin is expressed. The process of making these measurement masks included emoving edge labels, linking cells to their corresponding nuclei, and applying morphological operations such as erosion and dilation. To do this we used the skimage and cv2 libraries. <br />
 MANDATORY> SHOW EXAMPLE OF MEASUREMENT MASK FILE
